@@ -2,7 +2,7 @@
 import { GoogleGenAI, Modality } from "@google/genai";
 import { UserProfile, UserStats, Personality } from "./types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const getPersonalityPrompt = (personality: Personality) => {
   switch (personality) {
@@ -18,7 +18,6 @@ const getPersonalityPrompt = (personality: Personality) => {
 };
 
 export const generateDailyMessage = async (user: UserProfile, stats: UserStats) => {
-  const model = 'gemini-3-flash-preview';
   const personalityInstruction = getPersonalityPrompt(user.personality);
   const prompt = `
     ${personalityInstruction}
@@ -35,7 +34,7 @@ export const generateDailyMessage = async (user: UserProfile, stats: UserStats) 
   `;
 
   const response = await ai.models.generateContent({
-    model,
+    model: 'gemini-3-flash-preview',
     contents: prompt,
   });
 
@@ -43,7 +42,6 @@ export const generateDailyMessage = async (user: UserProfile, stats: UserStats) 
 };
 
 export const generateSilentJudge = async (user: UserProfile, stats: UserStats) => {
-  const model = 'gemini-3-flash-preview';
   const prompt = `
     Act as my future self from ${user.futureYears} away. 
     Current streak: ${stats.streak}.
@@ -54,7 +52,7 @@ export const generateSilentJudge = async (user: UserProfile, stats: UserStats) =
   `;
 
   const response = await ai.models.generateContent({
-    model,
+    model: 'gemini-3-flash-preview',
     contents: prompt,
   });
 
@@ -62,7 +60,6 @@ export const generateSilentJudge = async (user: UserProfile, stats: UserStats) =
 };
 
 export const generateReverseRegret = async (user: UserProfile, timeSpan: string) => {
-  const model = 'gemini-3-flash-preview';
   const prompt = `
     Act as my future self. 
     Describe a specific, haunting regret I will feel in ${timeSpan} if I stop being consistent with my ${user.careerGoals} and ${user.lifestyleGoals} today.
@@ -72,7 +69,7 @@ export const generateReverseRegret = async (user: UserProfile, timeSpan: string)
   `;
 
   const response = await ai.models.generateContent({
-    model,
+    model: 'gemini-3-flash-preview',
     contents: prompt,
   });
 

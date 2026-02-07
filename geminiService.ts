@@ -1,7 +1,7 @@
-
 import { GoogleGenAI, Modality } from "@google/genai";
 import { UserProfile, UserStats, Personality } from "./types";
 
+// The API key is injected by the platform into process.env.API_KEY
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const getPersonalityPrompt = (personality: Personality) => {

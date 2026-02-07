@@ -1,0 +1,7 @@
+{
+  "name": "Future Me Coach",
+  "description": "Receive guidance from your future self focused on discipline, regret-avoidance, and consistency. A serious, minimal tool for long-term growth.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
